@@ -1,4 +1,7 @@
 # libmx
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
 ```sh
 $ make
 $ make uninstall
@@ -6,9 +9,7 @@ $ make clean
 $ make reinstall
 ```
 
-| Pack | Path |
-| ------ | ------ |
-| Utils | [str/][PlOd] |
-| String | [str/][PlOd] |
-| Memory | [str/][PlOd] |
-| List | [str/][PlOd] |
+  - Utils pack
+  - String pack
+  - Memory pack
+  - List pack
