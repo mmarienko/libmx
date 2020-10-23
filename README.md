@@ -10,6 +10,7 @@ $ make clean
 $ make reinstall
 ```
 
+Packs:
   - Utils pack
   - String pack
   - Memory pack
