@@ -1,4 +1,4 @@
-# libmx
+# Libmx - static library for C
 
 ### Commands:
 ```sh
