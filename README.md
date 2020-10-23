@@ -1,6 +1,6 @@
 # libmx
 
-[![Build Status](!)
+[![Build Status]()
 
 ### Commands:
 ```sh
