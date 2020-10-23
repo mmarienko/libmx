@@ -9,7 +9,7 @@ all: MINILIBMX
 
 MINILIBMX:
 	mkdir $(FOLDER)
-	clang -std=c11 -Wall -Wextra -Werror -Wpedantic -c $(SRC) -I inc/libmx.h
+	clang -std=c11 -Wall -Wextra -Werror -Wpedantic -c $(SRC) -I $(INC)
 	mv *.o $(FOLDER)
 	ar -crs $(LIB) $(OBJ)
 	ranlib $(LIB)
