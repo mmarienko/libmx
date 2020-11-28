@@ -84,3 +84,5 @@ size_t mx_atoi(const char *);
 bool mx_isspace(char);
 bool mx_isalpha(const char);
 bool mx_isdigit(const char);
+bool mx_islower(int);
+bool mx_isupper(int);
