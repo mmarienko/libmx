@@ -81,6 +81,7 @@ size_t mx_atoi(const char *);
 bool mx_isalpha(const char);
 bool mx_isdigit(const char);
 bool mx_islower(int);
+bool mx_isupper(int);
 char *mx_strchr(const char *, int);
 void mx_printerr(const char *);
 
