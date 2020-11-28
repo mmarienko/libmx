@@ -2,27 +2,14 @@
 
 char *mx_strtrim(const char *str)
 {
-	if (str == 0)
-		return 0;
-	int i = 0;
-	int len = mx_strlen(str) - 1;
-	char *trimmedStr = mx_strnew(len + 1);
-	while (mx_isspace(str[i]))
-	{
-		i++;
-	}
-	while (mx_isspace(str[len]))
-	{
-		len--;
-	}
-	int len_true_string = len - i + 1;
-	int j = 0;
-	while (j < len_true_string)
-	{
-		trimmedStr[j] = str[i];
-		j++;
-		i++;
-	}
-	trimmedStr[j] = '\0';
-	return trimmedStr;
+	int len = 0;
+    char *new = NULL;
+    while (mx_isspace(*str))
+        str++;
+    len = mx_strlen(str);
+    while (mx_isspace(str[len - 1]))
+        len--;
+    new = mx_strnew(len);
+    mx_strncpy(new, str, len);
+    return (char *)new;
 }

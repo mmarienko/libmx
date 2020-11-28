@@ -2,14 +2,12 @@
 
 char *mx_strcpy(char *dst, const char *src)
 {
-    int i = 0;
-    while (i != mx_strlen(src))
-    {
+    char* gg = dst;
+    while (*src) {
         *dst = *src;
         dst++;
         src++;
-        i++;
     }
     *dst = '\0';
-    return dst;
+    return gg;
 }

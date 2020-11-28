@@ -1,7 +1,5 @@
-#ifndef LIBMX_H
-#define LIBMX_H
+#pragma once
 
-//includes
 #include <stdbool.h>
 #include <stdlib.h>
 #include <malloc/malloc.h>
@@ -39,6 +37,7 @@ int mx_strcmp(const char *, const char *);
 char *mx_strcat(char *, const char *);
 char *mx_strstr(const char *, const char *);
 int mx_get_substr_index(const char *, const char *);
+int mx_count_substr(const char *, const char *);
 int mx_count_words(const char *, char);
 char *mx_strnew(const int);
 char *mx_strtrim(const char *);
@@ -47,7 +46,8 @@ char **mx_strsplit(char const *, char);
 char *mx_strjoin(char const *, char const *);
 char *mx_file_to_str(const char *);
 char *mx_replace_substr(const char *, const char *, const char *);
-int mx_read_line(char **, int, char, const int);
+int mx_read_line(char **, size_t, char, const int);
+int mx_strncmp(const char *s1, const char *s2, int n);
 
 // Memory pack
 void *mx_memset(void *, int, size_t);
@@ -76,10 +76,11 @@ void mx_push_front(t_list **, void *);
 t_list *mx_sort_list(t_list *, bool (*)(void *, void *));
 
 // Utils
-void mx_swap(char **, int, int);
-char *mx_strchr(const char *, int );
 bool mx_isspace(char);
-int mx_count_substr(const char *, const char *);
-int mx_strncmp(const char *, const char *, int );
+size_t mx_atoi(const char *);
+bool mx_isalpha(const char);
+bool mx_isdigit(const char);
+bool mx_islower(int);
+char *mx_strchr(const char *, int);
+void mx_printerr(const char *);
 
-#endif

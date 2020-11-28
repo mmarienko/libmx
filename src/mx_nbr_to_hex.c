@@ -1,57 +1,32 @@
 #include "../inc/libmx.h"
 
 char *mx_nbr_to_hex(unsigned long nbr) {
+	unsigned long store = nbr;
+	unsigned long hexSymbol;
+	int counter = 0;
+	int i;
+	char *hex = NULL;
 
-    if (nbr <= 0) {
-        return 0;
-    }
-
-    if(nbr < 10) {
-        char a = nbr + 48;
-        char* s;
-        s = &a;
-        return s;
-    }
- 
-    int tmp = nbr;
-    int arr[20];
-    int count = 0;
-    for (int i = 0; tmp > 15; i++) {
-        arr[i] = tmp % 16;
-        tmp = tmp / 16;
-        count++;
-    }
-
-    count++;
-
-    arr[count - 1] = tmp;
-
-    //char* fin = mx_strnew(count);
-
-    char* fin = malloc(count);
-
-    for (int i = 0; i < count; i++) {
-        if (arr[i] < 9) {
-            fin[count - i - 1] = arr[i] + 48;
-        }
-        else if (arr[i] == 10) {
-            fin[count - i - 1] = 97;
-        }
-        else if (arr[i] == 11) {
-            fin[count - i - 1] = 98;
-        }
-        else if (arr[i] == 12) {
-            fin[count - i - 1] = 99;
-        }
-        else if (arr[i] == 13) {
-            fin[count - i - 1] = 100;
-        }
-        else if (arr[i] == 14) {
-            fin[count - i - 1] = 101;
-        }
-        else if (arr[i] == 15) {
-            fin[count - i - 1] = 102;
-        }
-    }
-    return fin;
+	if (nbr == 0) {
+		hex = mx_strnew(1);
+		hex[0] = 48;
+		return hex;
+	}
+	while (store) {
+		store = store / 16;
+		counter++;
+	}
+	hex = mx_strnew(counter);
+	store = nbr;
+	i = counter - 1;
+	while (store) {
+		hexSymbol = store % 16;
+		if (hexSymbol >= 0 && hexSymbol <= 9)
+			hex[i] = hexSymbol + 48;
+		else
+			hex[i] = hexSymbol + 87;
+		store = store / 16;
+		i--; 
+	}
+	return hex;
 }

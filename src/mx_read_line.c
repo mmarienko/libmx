@@ -1,46 +1,25 @@
 #include "../inc/libmx.h"
 
-int mx_read_line(char **lineptr, int buf_size, char delim, const int fd) {
-    static char *ostatok = NULL;
-    char buf[buf_size + 1];
-    int read_bytes = 0;
-    int delim_index = -1;
-    char *tmpstr = NULL;
-    char *tmp = NULL;
-    if(fd < 0){
-        return -2;
-    }
-    if (ostatok) {
-        tmpstr = mx_strdup(ostatok);
-    }
-    while ((read_bytes = read(fd, buf, buf_size)) >= 0) {
-        buf[read_bytes] = '\0';
-        tmp = mx_strjoin(tmpstr, buf);
-        mx_strdel(&tmpstr);
-        tmpstr = mx_strdup(tmp);
-        mx_strdel(&tmp);
-        delim_index = mx_get_char_index(tmpstr, delim);
-        if (delim_index != -1) {
-            tmpstr[delim_index] = '\0';
-            if (ostatok) {
-                mx_strdel(&ostatok);
-            }
-            ostatok = mx_strdup(tmpstr + delim_index + 1);
-            break;
+int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd) {
+    if (fd < 0) return -2;
+    char *line = *lineptr;
+    char buf[1];
+    if (buf_size >= 65535) return -2;
+    buf_size = 1;
+    int k = 0;
+    int i = 0;
+    int n = read(fd, buf, buf_size);
+    if (n == 0) return -1;
+    while (n != 0) {
+        if (buf[0] == delim) {
+            line[i] = '\0';
+            return k;
         }
-        if (read_bytes == 0) {
-            if (ostatok) {
-                mx_strdel(&ostatok);
-            }
-            break;
-        }
+        line[i++] = buf[0];
+        k++;
+        n = read(fd, buf, buf_size);
+        if (n == -1) return -2;
     }
-    if (read_bytes == -1) {
-        return -1;
-    }
-    *lineptr = mx_strdup(tmpstr);
-    mx_strdel(&tmpstr);
-    return mx_strlen(*lineptr);
+    line[i] = '\0';
+    return k;
 }
-
-

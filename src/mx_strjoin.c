@@ -7,5 +7,10 @@ char *mx_strjoin(char const *s1, char const *s2) {
         return mx_strdup(s2);
     if (s2 == NULL)
         return mx_strdup(s1);
-    return mx_strcat(mx_strcpy(mx_strnew(mx_strlen(s1) + mx_strlen(s2)), s1), s2);
+    char* s3;
+    if (!(s3 = mx_strnew(mx_strlen(s1) + mx_strlen(s2))))
+        return NULL;
+    mx_strcpy(s3, s1);
+    mx_strcat(s3, s2);
+    return s3;
 }

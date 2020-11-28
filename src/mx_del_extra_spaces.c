@@ -18,7 +18,7 @@ char *mx_del_extra_spaces(const char *str)
         }
         else if (mx_isspace(trimmed[i]) && !mx_isspace(trimmed[i + 1]))
         {
-            nospaces[j] = trimmed[i];
+            nospaces[j] = ' ';
             j++;
         }
         else if (mx_isspace(trimmed[i]))
@@ -31,5 +31,7 @@ char *mx_del_extra_spaces(const char *str)
             j++;
         }
     }
+    mx_strdel(&trimmed);
     return nospaces;
 }
+

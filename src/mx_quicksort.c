@@ -1,65 +1,33 @@
 #include "../inc/libmx.h"
 
-int mx_quicksort(char **arr, int left, int right)
-{
-    int count = 0;
-    if (arr != NULL)
-    {
-        int i = left + 1;
+int mx_quicksort(char **arr, int left, int right) {
+    if (!arr) return -1;
+    int counter = 0;
+
+    if (left < right) {
+        int k = left;
         int j = right;
-        int x = (left + right) / 2;
-        if (right - left == 1)
-        {
-            if (mx_strlen(arr[left]) > mx_strlen(arr[right]))
-            {
-                mx_swap(arr, left, right);
-            }
-            return 1;
-        }
-        while (i < j)
-        {
-            while ((mx_strlen(arr[i]) < mx_strlen(arr[x])) && (i <= right))
-                i++;
-            while ((mx_strlen(arr[j]) > mx_strlen(arr[x])) && (j >= left))
+        char *pivot = arr[(j + k) / 2];
+
+        while (k <= j) {
+            while (mx_strlen(arr[k]) < mx_strlen(pivot)) k++;
+            while (mx_strlen(arr[j]) > mx_strlen(pivot)) j--;
+
+            if (k <= j) {
+                if (mx_strlen(arr[j]) != mx_strlen(arr[k])) {
+                    char *temp = arr[k];
+                    arr[k] = arr[j];
+                    arr[j] = temp;
+                    counter++;
+                }
                 j--;
-            if (i < j)
-            {
-                mx_swap(arr, i, j);
+                k++;
             }
-            if (left < j - 1)
-            {
-                i = left + 1;
-                j = j - 1;
-                x = (i + j) / 2;
-                while ((mx_strlen(arr[i]) < mx_strlen(arr[x])) && (i <= right))
-                    i++;
-                while ((mx_strlen(arr[j]) > mx_strlen(arr[x])) && (j >= left))
-                    j--;
-                if (i < j)
-                {
-                    mx_swap(arr, i, j);
-                }
-            }
-            if (j + 1 < right)
-            {
-                i = j + 1;
-                j = right;
-                x = (i + j) / 2;
-                while ((mx_strlen(arr[i]) < mx_strlen(arr[x])) && (i <= right))
-                    i++;
-                while ((mx_strlen(arr[j]) > mx_strlen(arr[x])) && (j >= left))
-                    j--;
-                if (i < j)
-                {
-                    mx_swap(arr, i, j);
-                }
-            }
-            count++;
         }
-        return count;
-    }
-    else
-    {
-        return -1;
-    }
+
+        counter += mx_quicksort(arr, left, j);
+        counter += mx_quicksort(arr, k, right);
+    }    
+    return counter;
 }
+

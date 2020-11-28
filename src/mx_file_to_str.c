@@ -2,6 +2,9 @@
 
 char *mx_file_to_str(const char *file) {
     int fd = open(file, O_RDONLY);
+    if (fd == -1) {
+        return NULL;
+    }
     char buf;
     int count = 0;
 

@@ -2,15 +2,24 @@
 
 void *mx_memmem(const void *big, size_t big_len, const void *little, size_t little_len)
 {
-    const char *begin;
-    const char *const last_possible = (const char *)big + big_len - little_len;
-    if (little_len == 0)
-        return (void *)big;
-    for (begin = (const char *)big; begin <= last_possible; ++begin)
-        if (begin[0] == ((const char *)little)[0] &&
-            !mx_memcmp((const void *)&begin[1],
-                       (const void *)((const char *)little + 1),
-                       little_len - 1))
-            return (void *)begin;
-    return NULL;
+    register char *cur, *last;
+	const char *cl = (const char *)big;
+	const char *cs = (const char *)little;
+
+	if (big_len == 0 || little_len == 0)
+		return NULL;
+
+	if (big_len < little_len)
+		return NULL;
+
+	if (little_len == 1)
+		return mx_memchr(big, (int)*cs, big_len);
+
+	last = (char *)cl + big_len - little_len;
+
+	for (cur = (char *)cl; cur <= last; cur++)
+		if (cur[0] == cs[0] && mx_memcmp(cur, cs, little_len) == 0)
+			return cur;
+
+	return NULL;
 }
