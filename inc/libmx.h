@@ -1,5 +1,4 @@
-#ifndef LIBMX_H
-#define LIBMX_H
+#pragma once
 
 //includes
 #include <stdbool.h>
@@ -78,8 +77,10 @@ t_list *mx_sort_list(t_list *, bool (*)(void *, void *));
 // Utils
 void mx_swap(char **, int, int);
 char *mx_strchr(const char *, int );
-bool mx_isspace(char);
 int mx_count_substr(const char *, const char *);
 int mx_strncmp(const char *, const char *, int );
-
-#endif
+void mx_printerr(const char *);
+size_t mx_atoi(const char *);
+bool mx_isspace(char);
+bool mx_isalpha(const char);
+bool mx_isdigit(const char);
