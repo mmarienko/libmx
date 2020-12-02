@@ -47,7 +47,7 @@ char *mx_strjoin(char const *, char const *);
 char *mx_file_to_str(const char *);
 char *mx_replace_substr(const char *, const char *, const char *);
 int mx_read_line(char **, size_t, char, const int);
-int mx_strncmp(const char *s1, const char *s2, int n);
+int mx_strncmp(const char *, const char *, int);
 
 // Memory pack
 void *mx_memset(void *, int, size_t);
