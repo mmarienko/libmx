@@ -8,4 +8,4 @@
 | `make clean`        | clean folder obj/    | String pack        | 
 | `make reinstall`    | remove libmx.a and folder obj/ && create libmx.a and folder obj/ | Memory pack    | 
 | `make uninstall`    | remove libmx.a and folder obj/ | Memory pack    |
-| `clang` + `libmx.a` + `-o $(BINARY)`    | usage |
+| `gcc` + `libmx.a`    | usage |
